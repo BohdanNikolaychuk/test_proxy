@@ -1,30 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { getUsers } from '../../entities/user/api/get-users.js';
+import React from 'react';
 import { Row, Col, Input, Select } from 'antd';
 import useSort from '../../entities/user/lib/use-sort.js';
 import { UserCard } from '../../entities/user/ui/user-card.ui.jsx';
+import { useLoaderData } from 'react-router';
 
 const { Search } = Input;
 const { Option } = Select;
 
 export const MainPage = () => {
-  const [users, setUsers] = useState(null);
-  const [searchValue, setSearchValue] = useState('');
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const data = await getUsers();
-        setUsers(data);
-      } catch (error) {}
-    };
-
-    fetchUsers();
-  }, []);
-
-  const handleSearch = value => {
-    setSearchValue(value);
-  };
+  const users = useLoaderData();
 
   return (
     <main>
@@ -41,12 +25,11 @@ export const MainPage = () => {
         </Select>
       </div>
       <Row gutter={[16, 16]}>
-        {users &&
-          users.map(user => (
-            <Col key={user.id} className="gutter-row" span={6}>
-              <UserCard {...user} />
-            </Col>
-          ))}
+        {users.map(user => (
+          <Col key={user.id} className="gutter-row" span={6}>
+            <UserCard {...user} />
+          </Col>
+        ))}
       </Row>
     </main>
   );
