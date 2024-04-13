@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const PostsPage = () => {
+export const DetailsPage = () => {
   return <div>posts-page.ui</div>;
 };
