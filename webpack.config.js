@@ -5,10 +5,13 @@ module.exports = {
   entry: path.join(__dirname, 'src/app', 'index.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/',
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'public', 'index.html'),
+      filename: 'index.html',
     }),
   ],
   module: {
@@ -40,6 +43,10 @@ module.exports = {
   },
   devServer: {
     port: 3000,
+    compress: true,
+    // static: {
+    //   directory: path.join(__dirname, 'public'),
+    // },
     historyApiFallback: true,
   },
 };

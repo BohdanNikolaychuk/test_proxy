@@ -19,13 +19,13 @@ class ApiClient {
 
   async get(endpoint, queryParams) {
     const url = new URL(endpoint, this.baseUrl);
-
+    console.log('queryParams', queryParams);
     if (queryParams) {
       Object.entries(queryParams).forEach(([key, value]) => {
         url.searchParams.append(key, value.toString());
       });
     }
-
+    console.log('URL', url.toString());
     const response = await fetch(url.toString(), {
       method: 'GET',
       headers: {
