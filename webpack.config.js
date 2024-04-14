@@ -44,9 +44,7 @@ module.exports = {
   devServer: {
     port: 3000,
     compress: true,
-    // static: {
-    //   directory: path.join(__dirname, 'public'),
-    // },
+
     historyApiFallback: true,
   },
 };
