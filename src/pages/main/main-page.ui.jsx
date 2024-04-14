@@ -25,33 +25,40 @@ export const MainPage = () => {
         <meta name="description" content="Home " />
         <meta name="theme-color" content="#E6E6FA" />
       </Helmet>
-      <main>
-        <div style={{ marginBottom: 16 }}>
-          <Input
-            placeholder="Search by username"
-            allowClear
-            style={{ width: 300, marginRight: 16 }}
-            onChange={e => handleSearchChange(e.target.value)}
-            value={searchValue}
-          />
 
-          <Select
-            style={{ width: 120 }}
-            onChange={handleSortChange}
-            value={sortOrder}
+      <div style={{ marginBottom: 16 }}>
+        <Input
+          placeholder="Search by username"
+          allowClear
+          style={{ width: 300, marginRight: 16 }}
+          onChange={e => handleSearchChange(e.target.value)}
+          value={searchValue}
+        />
+
+        <Select
+          style={{ width: 120 }}
+          onChange={handleSortChange}
+          value={sortOrder}
+        >
+          <Option value="asc">Ascending</Option>
+          <Option value="desc">Descending</Option>
+        </Select>
+      </div>
+      <Row gutter={[16, 16]}>
+        {filteredUsers.map(user => (
+          <Col
+            key={user.id}
+            className="gutter-row"
+            xs={24}
+            sm={24}
+            md={12}
+            lg={8}
+            xl={6}
           >
-            <Option value="asc">Ascending</Option>
-            <Option value="desc">Descending</Option>
-          </Select>
-        </div>
-        <Row gutter={[16, 16]}>
-          {filteredUsers.map(user => (
-            <Col key={user.id} className="gutter-row" span={6}>
-              <UserCard {...user} />
-            </Col>
-          ))}
-        </Row>
-      </main>
+            <UserCard {...user} />
+          </Col>
+        ))}
+      </Row>
     </>
   );
 };

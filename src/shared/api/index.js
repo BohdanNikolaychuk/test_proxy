@@ -25,7 +25,6 @@ class ApiClient {
         url.searchParams.append(key, value.toString());
       });
     }
-    console.log('URL', url.toString());
     const response = await fetch(url.toString(), {
       method: 'GET',
       headers: {

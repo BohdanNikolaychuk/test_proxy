@@ -1,13 +1,18 @@
 import React from 'react';
 
 import { PostCard } from '../../entities/post/ui/post-card.ui';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useLocation, useParams } from 'react-router';
 import { Col, Row } from 'antd';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 export const DetailsPage = () => {
+  const { contentType } = useParams();
   const posts = useLoaderData();
+
+  const capitalizedText = text => {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  };
   return (
     <>
       <Helmet>
@@ -18,13 +23,24 @@ export const DetailsPage = () => {
       </Helmet>
       <div>
         <Link to="/">Go To Main Page</Link>
-        <Row gutter={[16, 16]}>
-          {posts.map(post => (
-            <Col key={post.id} className="gutter-row" span={6}>
-              <PostCard key={post.id} {...post} />
-            </Col>
-          ))}
-        </Row>
+        <h2>{capitalizedText(contentType)}</h2>
+        <div style={{ marginTop: '16px' }}>
+          <Row gutter={[16, 16]}>
+            {posts.map(post => (
+              <Col
+                key={post.id}
+                className="gutter-row"
+                xs={24}
+                sm={24}
+                md={12}
+                lg={8}
+                xl={6}
+              >
+                <PostCard key={post.id} {...post} />
+              </Col>
+            ))}
+          </Row>
+        </div>
       </div>
     </>
   );

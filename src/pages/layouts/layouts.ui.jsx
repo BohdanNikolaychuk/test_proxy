@@ -4,7 +4,9 @@ import React from 'react';
 export function GenericLayout() {
   return (
     <>
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </>
   );
 }
