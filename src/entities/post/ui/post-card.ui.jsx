@@ -1,4 +1,4 @@
-import { Button, Card, Flex } from 'antd';
+import { Card } from 'antd';
 import React from 'react';
 import './post-card.css';
 export const PostCard = ({ title, body }) => {
@@ -10,7 +10,7 @@ export const PostCard = ({ title, body }) => {
       }}
       title={title}
     >
-      <p className="card__desc">{body}</p>
+      {body && <p className="card__desc">{body}</p>}
     </Card>
   );
 };
