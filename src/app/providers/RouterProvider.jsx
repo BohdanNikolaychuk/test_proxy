@@ -1,12 +1,12 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { pathKeys } from '../../shared/lib/react-router/config.js';
-import { GenericLayout } from '../../pages/layouts/layouts.ui.jsx';
-import { MainPage } from '../../pages/main/main-page.ui.jsx';
+
+import { GenericLayout } from '../../pages/layouts/layouts.ui';
+import { MainPage } from '../../pages/main/main-page.ui';
 import React from 'react';
-import { DetailsPage } from '../../pages/details/details-page.ui.jsx';
-import { getUsers } from '../../entities/user/api/get-users.js';
-import { getPostsByUserId } from '../../entities/post/api/get-post-byId.js';
-import { getAlbumsByUserId } from '../../entities/albums/api/get-albums-byId.js';
+import { DetailsPage } from '../../pages/details/details-page.ui';
+import { getUsers } from '../../entities/user/api/get-users';
+import { getPostsByUserId } from '../../entities/post/api/get-post-byId';
+import { getAlbumsByUserId } from '../../entities/albums/api/get-albums-byId';
 
 const router = createBrowserRouter([
   {
@@ -23,10 +23,16 @@ const router = createBrowserRouter([
         element: <DetailsPage />,
         loader: ({ params }) => {
           const { userId, contentType } = params;
-          if (contentType === 'posts') {
-            return getPostsByUserId({ userId });
-          } else if (contentType === 'albums') {
-            return getAlbumsByUserId({ userId });
+
+          switch (contentType) {
+            case 'posts':
+              return getPostsByUserId({ userId });
+            case 'albums':
+              return getAlbumsByUserId({ userId });
+            default:
+              return Promise.reject(
+                new Error(`Unknown contentType: ${contentType}`)
+              );
           }
         },
       },

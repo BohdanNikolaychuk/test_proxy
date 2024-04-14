@@ -5,7 +5,6 @@ import { useLoaderData, useLocation, useParams } from 'react-router';
 import { Col, Row } from 'antd';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-
 export const DetailsPage = () => {
   const { contentType } = useParams();
   const posts = useLoaderData();
@@ -22,7 +21,9 @@ export const DetailsPage = () => {
         <meta name="theme-color" content="#E6E6FA" />
       </Helmet>
       <div>
-        <Link to="/">Go To Main Page</Link>
+        <Link className="link__button" to="/">
+          Back to Main Page
+        </Link>
         <h2>{capitalizedText(contentType)}</h2>
         <div style={{ marginTop: '16px' }}>
           <Row gutter={[16, 16]}>
